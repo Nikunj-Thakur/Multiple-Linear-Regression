@@ -39,3 +39,11 @@ ax1.set_title("Cost vs. iteration");  ax2.set_title("Cost vs. iteration (tail)")
 ax1.set_ylabel('Cost')             ;  ax2.set_ylabel('Cost') 
 ax1.set_xlabel('iteration step')   ;  ax2.set_xlabel('iteration step') 
 plt.show()
+
+X_features = ['size(sqft)','bedrooms','floors','age']
+fig,ax=plt.subplots(1, 4, figsize=(12, 3), sharey=True)
+for i in range(len(ax)):
+    ax[i].scatter(X_train[:,i],y_train)
+    ax[i].set_xlabel(X_features[i])
+ax[0].set_ylabel("Price (1000's)")
+plt.show()
