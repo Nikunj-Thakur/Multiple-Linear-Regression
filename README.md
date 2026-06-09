@@ -1,45 +1,49 @@
-# 🏠 Multiple Linear Regression: House Price Prediction
+# 😊 Multiple Linear Regression: World Happiness Index Prediction
 
-> Predicting house prices using multivariate linear regression with gradient descent optimization
+> Predicting the World Happiness Index using multiple socioeconomic factors with gradient descent optimization
 
 ![Python](https://img.shields.io/badge/Python-3.7+-blue?style=flat-square&logo=python)
 ![ML](https://img.shields.io/badge/MachineLearning-Multiple%20Regression-brightgreen?style=flat-square)
+![Data](https://img.shields.io/badge/Data-WHR%202024-orange?style=flat-square)
 
 ---
 
 ## 📌 Overview
 
-This project implements **multiple linear regression from scratch** to predict house prices based on multiple features. The model uses **gradient descent optimization** to find the optimal parameters (weights and bias) that minimize the cost function.
+This project implements **multiple linear regression from scratch** to predict the World Happiness Index based on six socioeconomic features. The model uses **gradient descent optimization** to find the optimal parameters (weights and bias) that minimize the cost function, enabling insights into what factors contribute most to national happiness.
 
 ### 🎯 Key Objectives
 
-✅ **Multiple Feature Analysis**: Incorporate multiple input features for prediction  
+✅ **Six Feature Analysis**: Analyze multiple socioeconomic indicators  
 ✅ **Gradient Descent Optimization**: Iterative parameter optimization  
 ✅ **Cost Function Minimization**: Monitor convergence and model performance  
 ✅ **Vectorized Operations**: Efficient computation using NumPy  
+✅ **Data Visualization**: Scatter plots and cost progression analysis  
 
 ---
 
 ## 🤔 Problem Statement
 
-**Goal**: Predict house sale prices based on multiple property characteristics
+**Goal**: Predict the World Happiness Index based on multiple socioeconomic factors
 
 ### Features (Input Variables)
-- **Square Footage (X₁)**: Size of the house in square feet
-- **Number of Bedrooms (X₂)**: Count of bedrooms
-- **Number of Floors (X₃)**: Count of floors/stories
-- **Age of Property (X₄)**: Age of the house in years
+- **GDP per Capita (X₁)**: Economic productivity and wealth
+- **Social Support (X₂)**: Strength of family and social networks
+- **Healthy Life Expectancy (X₃)**: Years of healthy living expected
+- **Freedom to Make Life Choices (X₄)**: Personal autonomy and freedom
+- **Generosity (X₅)**: Charitable giving and helping others
+- **Perceptions of Corruption (X₆)**: Trust in government and institutions
 
 ### Target Variable
-- **Sale Price (y)**: House price in thousands of dollars
+- **Happiness Score (y)**: World Happiness Index (0-10 scale)
 
 ### The Mathematical Model
 ```
-Price = w₁(Square Footage) + w₂(Bedrooms) + w₃(Floors) + w₄(Age) + b
+Happiness = w₁(GDP) + w₂(Social) + w₃(LifeExp) + w₄(Freedom) + w₅(Generosity) + w₆(Corruption) + b
 ```
 
 Where:
-- **w** = weights/coefficients for each feature
+- **w** = weights/coefficients for each feature (learned via gradient descent)
 - **b** = bias/intercept term
 
 ---
@@ -48,40 +52,58 @@ Where:
 
 ```
 Multiple Linear Regression/
-├── house_price_prediction_model.py    # Main training and prediction script
-├── model_parameters.py                # Model functions and utilities
-└── README.md                          # This file
+├── happiness_index_gradient_descent_model.py    # Main training and prediction script
+├── model_parameters.py                          # Model functions and utilities
+├── WHR_2024.csv                                 # World Happiness Report 2024 dataset
+├── README.md                                    # This file
+└── images/
+    ├── Features_Plots.png                       # Scatter plots of features vs happiness
+    └── Cost_vs_Iterations.png                   # Gradient descent convergence plot
 ```
 
 ---
 
 ## 📄 Files Description
 
-### `house_price_prediction_model.py`
+### `happiness_index_gradient_descent_model.py`
 The main execution script that:
-- Defines the training dataset with 3 sample houses
-- Initializes model parameters
-- Demonstrates both looping and vectorized prediction methods
-- Computes cost and gradients
-- Runs gradient descent optimization
+- Loads and preprocesses WHR_2024.csv dataset
+- Removes rows with missing values
+- Visualizes relationships between features and happiness index
+- Initializes model parameters and learning rate
+- Computes initial gradients
+- Runs gradient descent optimization for 1000 iterations
 - Visualizes cost function convergence
+- Makes predictions on sample data
 
 **Key Variables**:
-- `X_train`: Feature matrix (3 samples × 4 features)
-- `y_train`: Target prices
-- `alpha`: Learning rate (step size for gradient descent)
-- `iterations`: Number of optimization steps
+- `X_train`: Feature matrix (~160 countries × 6 features after removing NaN)
+- `y_train`: Target happiness scores
+- `alpha`: Learning rate = 0.01 (step size for gradient descent)
+- `iterations`: Number of optimization steps = 2000
+- `w_final`: Learned weight coefficients
+- `b_final`: Learned bias term
 
 ### `model_parameters.py`
 Contains all model functions:
 
 | Function | Purpose |
 |----------|---------|
-| `predict_simple_loop()` | Prediction using explicit loops |
-| `predict_vectorized()` | Prediction using NumPy vector operations |
-| `compute_cost()` | Calculates Mean Squared Error (MSE) |
-| `compute_gradient()` | Computes gradients for optimization |
-| `gradient_descent()` | Main optimization algorithm |
+| `compute_gradient()` | Computes gradients of cost function for backpropagation |
+| `compute_cost()` | Calculates Mean Squared Error (MSE) loss |
+| `gradient_descent()` | Main optimization algorithm that iteratively updates parameters |
+
+---
+
+## 📊 Visualizations
+
+### Features Distribution
+![Features Plots](images/Features_Plots.png)
+*Scatter plots showing relationship between each socioeconomic factor and the World Happiness Index*
+
+### Model Convergence
+![Cost vs Iterations](images/Cost_vs_Iterations.png)
+*Gradient descent cost function over 2000 iterations, demonstrating model convergence*
 
 ---
 
@@ -89,39 +111,47 @@ Contains all model functions:
 
 ### Prerequisites
 ```
-Python 3.7+
+Python 3.8+
+Pandas
 NumPy
 Matplotlib
 ```
 
 ### Installation
 ```bash
-pip install numpy matplotlib
+pip install pandas numpy matplotlib
 ```
 
 ### Running the Model
 ```bash
-python house_price_prediction_model.py
+python happiness_index_gradient_descent_model.py
 ```
 
 ### Expected Output
-- Predictions from both loop and vectorized methods
-- Cost function value
-- Gradients with respect to weights and bias
-- Trained parameters (w_final, b_final)
-- Cost convergence plot
+- 6 scatter plots showing each feature vs happiness index
+- Final trained weights and bias after 2000 iterations
+- Cost function visualization (initial 100 iterations + tail view from iteration 100 onwards)
+- Predicted happiness score for the 20th country (X_train[19])
 
 ---
 
 ## 📊 Training Data
 
-```python
-X_train = [
-    [2104,  5, 1, 45],    # House 1: 2104 sqft, 5 bed, 1 floor, 45 yrs
-    [1416,  3, 2, 40],    # House 2: 1416 sqft, 3 bed, 2 floor, 40 yrs
-    [852,   2, 1, 35]     # House 3: 852 sqft, 2 bed, 1 floor, 35 yrs
-]
-y_train = [460, 232, 178]  # Prices in thousands
+**Dataset**: World Happiness Report 2024 (WHR_2024.csv)
+- **Sample Size**: 169 countries (after removing missing values)
+- **Features**: 6 socioeconomic indicators
+- **Target**: Happiness Score (range: 1.721 - 7.741)
+
+**Sample Data**:
+```
+Country: Finland
+GDP per Capita: 1.844
+Social Support: 1.572
+Healthy Life Expectancy: 0.695
+Freedom to Make Life Choices: 0.859
+Generosity: 0.142
+Perceptions of Corruption: 0.546
+Happiness Score: 7.741 ✓
 ```
 
 ---
@@ -161,20 +191,20 @@ Current configuration in the script:
 
 | Parameter | Value | Description |
 |-----------|-------|-------------|
-| `alpha` (Learning Rate) | 5.0e-7 | Controls step size in gradient descent |
-| `iterations` | 1000 | Number of optimization steps |
-| `initial_w` | [0, 0, 0, 0] | Initial weights |
+| `alpha` (Learning Rate) | 0.01 | Controls step size in gradient descent |
+| `iterations` | 2000 | Number of optimization steps |
+| `initial_w` | [0, 0, 0, 0, 0, 0] | Initial weights (6 features) |
 | `initial_b` | 0 | Initial bias |
 
-**Note**: The learning rate is small to prevent overshooting during optimization.
+**Note**: Learning rate of 0.01 provides good convergence speed for this dataset.
 
 ---
 
 ## 📊 Visualization
 
 The script generates a cost convergence plot with two subplots:
-1. **Full History**: Cost vs iteration (all 1000 iterations)
-2. **Tail View**: Cost vs iteration (last 900 iterations) for detailed analysis
+1. **Initial Phase**: Cost vs iteration (first 100 iterations)
+2. **Tail View**: Cost vs iteration (iterations 100-2000) for detailed convergence analysis
 
 This helps identify:
 - Whether the algorithm is converging
@@ -252,10 +282,12 @@ Consider implementing:
 
 ## 📝 Notes
 
-- The initial parameters are pre-trained in this example
-- The small learning rate ensures stable convergence
+- Initial parameters start at zeros
+- Learning rate (alpha = 0.01) balances convergence speed and stability
 - MSE is used as the cost metric
 - All computations use double-precision floating point
+- Script uses `np.dot()` for efficient vectorized predictions
+- `os.chdir()` ensures the script finds CSV file regardless of execution directory
 
 ---
 
