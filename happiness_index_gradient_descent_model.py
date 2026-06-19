@@ -40,7 +40,7 @@ print(f"Final Weights: {w_final}, Bias : {b_final}\n")
 
 # plot cost versus iteration
 fig, (ax1, ax2) = plt.subplots(1, 2, constrained_layout=True, figsize=(12, 4))
-ax1.plot(J_hist[:100]) #ax1.plot(range(len(J_hist[:100])), J_hist[:100])
+ax1.plot(J_hist[:100]) # ax1.plot(range(len(J_hist[:100])), J_hist[:100])
 ax1.set_title("Cost vs. iteration")
 ax1.set_ylabel('Cost')
 ax1.set_xlabel('iteration step')
