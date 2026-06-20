@@ -16,6 +16,9 @@ X_mean = X_train.mean(axis=0)  #store them for normalizing test data later on
 X_std = X_train.std(axis=0)  #store them for normalizing test data later on
 X_norm = (X_train - X_mean) / X_std
 
+print(f"Peak to Peak range by column in Raw        X:{np.ptp(X_train, axis=0)}")
+print(f"Peak to Peak range by column in Normalized X:{np.ptp(X_norm, axis=0)}")
+
 y_train = df['happiness_score'].values  # Target variable (column 2)
 
 X_features = ['gdp_per_capita', 'social_support', 'healthy_life_expectancy', 'freedom_to_make_life_choices',
